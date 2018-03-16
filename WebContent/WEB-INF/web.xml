@@ -7,6 +7,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>messagelist</servlet-name>
-    <url-pattern>/rebot/message.action</url-pattern>
+    <url-pattern>/message.action</url-pattern>
   </servlet-mapping>
 </web-app>

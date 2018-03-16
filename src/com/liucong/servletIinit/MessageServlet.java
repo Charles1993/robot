@@ -1,11 +1,19 @@
 package com.liucong.servletIinit;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+
 
 /**
  * Servlet implementation class MessageServlet
@@ -25,7 +33,44 @@ public class MessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("驱动加载成功");
+			
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+			System.out.println("驱动加载失败");
+		}
+		Connection con=null;
+		Statement st=null;
+		try {
+			//指定数据库连接编码，防止出错
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+			String sql="select * from message";
+//			PreparedStatement ps=con.prepareStatement(sql);
+			st=con.createStatement();
+			ResultSet resultSet=st.executeQuery(sql);
+			while (resultSet.next()) {
+				System.out.println((int)resultSet.getInt("id"));
+				System.out.println((String)resultSet.getString("command"));
+				System.out.println((String)resultSet.getString("contend"));
+				System.out.println((String)resultSet.getString("describle"));
+			}
+			System.out.println("获取数据库连接成功");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("获取数据库连接失败");
+			
+		}finally {
+			try {
+				con.close();
+				st.close();
+				System.out.println("数据库连接关闭");
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.getRequestDispatcher("/WEB-INF/jsp/message.jsp").forward(request, response);
 	}
