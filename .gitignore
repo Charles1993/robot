@@ -1,3 +1,5 @@
 .settings
 /classes
 .DS_Store
+.project
+.classpath
