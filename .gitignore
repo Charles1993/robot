@@ -1,6 +1,6 @@
 .settings
-/classes
+WebContent/WEB-INF/classes/*
+.class
 .DS_Store
 .project
 .classpath
-README.MD

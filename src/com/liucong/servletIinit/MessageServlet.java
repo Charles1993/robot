@@ -61,6 +61,8 @@ public class MessageServlet extends HttpServlet {
 			e.printStackTrace();
 			System.out.println("获取数据库连接失败");
 			
+			
+			
 		}finally {
 			try {
 				con.close();
