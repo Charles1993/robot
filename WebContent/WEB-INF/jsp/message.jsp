@@ -13,12 +13,14 @@
 <meta name="keywords" content="">
 
 <link rel="stylesheet" href="<%=bath %>/resources/css/bootstrap.min.css">  
-<script src="<%=bath %>/Wresources/js/bootstrap.min.js"></script>
+<script src="<%=bath %>/resources/js/bootstrap.min.js"></script>
 </head>
 <body>
 
 
-	<form action="/rebot/message.action"></form>
+	<form action="/rebot/message.action">
+	
+	</form>
 
 	<div class="table-responsive">
 		<table class="table">
