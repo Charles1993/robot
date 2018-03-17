@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% String bath=request.getContextPath(); %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,44 +18,42 @@
 <body>
 
 
-<form action="/rebot/message.action"></form>
+	<form action="/rebot/message.action"></form>
 
-<div class="table-responsive">
-<table class="table">
-	<caption>上下文表格布局</caption>
-	<thead>
-		<tr>
-			<th>id</th>
-			<th>指令</th>
-			<th>内容</th>
-			<th>描述</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr class="active">
-			<td>产品1</td>
-			<td>23/11/2013</td>
-			<td>待发货</td>
-		</tr>
-		<tr class="success">
-			<td>产品2</td>
-			<td>10/11/2013</td>
-			<td>发货中</td>
-		</tr>
-		<tr  class="warning">
-			<td>产品3</td>
-			<td>20/10/2013</td>
-			<td>待确认</td>
-		</tr>
-		<tr  class="danger">
-			<td>产品4</td>
-			<td>20/10/2013</td>
-			<td>已退货</td>
-		</tr>
-	</tbody>
-</table>
+	<div class="table-responsive">
+		<table class="table">
+			<caption>机器人信回复维护列表</caption>
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>指令</th>
+					<th>内容</th>
+					<th>描述</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach items="${messages}" var="message" varStatus="status">
+					<c:if test="${status.index % 2 != 0}">
+						<tr class="success">
+							<td>${status.index + 1}</td>
+							<td>${message.command}</td>
+							<td>${message.contend}</td>
+							<td>${message.describle}</td>
+						</tr>
+					</c:if>
+					<c:if test="${status.index % 2 != 1}">
+						<tr class="warning">
+							<td>${status.index + 1}</td>
+							<td>${message.command}</td>
+							<td>${message.contend}</td>
+							<td>${message.describle}</td>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</tbody>
+		</table>
 
-</div>  	
-    
+	</div>
+
 </body>
 </html>

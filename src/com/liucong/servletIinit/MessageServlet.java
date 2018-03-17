@@ -6,11 +6,15 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.liucong.pojo.Message;
 
 
 
@@ -49,12 +53,20 @@ public class MessageServlet extends HttpServlet {
 //			PreparedStatement ps=con.prepareStatement(sql);
 			st=con.createStatement();
 			ResultSet resultSet=st.executeQuery(sql);
+			List<Message> messages_list=new ArrayList<Message>();
 			while (resultSet.next()) {
+				Message message=new Message();
+				messages_list.add(message);
+				message.setId(resultSet.getInt("id"));
+				message.setCommand(resultSet.getString("command"));
+				message.setContend(resultSet.getString("contend"));
+				message.setDescrible(resultSet.getString("describle"));
 				System.out.println((int)resultSet.getInt("id"));
 				System.out.println((String)resultSet.getString("command"));
 				System.out.println((String)resultSet.getString("contend"));
 				System.out.println((String)resultSet.getString("describle"));
 			}
+			request.setAttribute("messages", messages_list);
 			System.out.println("获取数据库连接成功");
 		} catch (SQLException e) {
 			e.printStackTrace();
