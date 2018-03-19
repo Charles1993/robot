@@ -1,6 +1,6 @@
-package com.duke.servlet;
+package com.admin.servlet;
 
-import com.duke.pojo.User;
+import com.admin.pojo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
