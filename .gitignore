@@ -6,4 +6,5 @@ WebContent/WEB-INF/classes/*
 .classpath
 .idea
 robot.iml
-
+*.war
+WebContent/index.html

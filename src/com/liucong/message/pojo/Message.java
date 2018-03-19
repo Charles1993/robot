@@ -1,4 +1,4 @@
-package com.liucong.pojo;
+package com.liucong.message.pojo;
 /**
  * 表message 对应的实体类
  * @author liucong
