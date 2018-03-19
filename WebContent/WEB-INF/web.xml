@@ -9,4 +9,5 @@
     <servlet-name>messagelist</servlet-name>
     <url-pattern>/message.action</url-pattern>
   </servlet-mapping>
+  
 </web-app>
