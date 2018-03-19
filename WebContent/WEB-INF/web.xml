@@ -8,7 +8,7 @@
 
   <servlet>
     <servlet-name>login</servlet-name>
-    <servlet-class>com.duke.servlet.LoginServlet</servlet-class>
+    <servlet-class>com.admin.servlet.LoginServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>
