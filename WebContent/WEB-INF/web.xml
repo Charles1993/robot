@@ -3,7 +3,7 @@
   <display-name>robot</display-name>
   <servlet>
     <servlet-name>messagelist</servlet-name>
-    <servlet-class>com.liucong.servletIinit.MessageServlet</servlet-class>
+    <servlet-class>com.liucong.message.servletIinit.MessageServlet</servlet-class>
   </servlet>
 
   <servlet>

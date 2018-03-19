@@ -21,7 +21,7 @@
 
 </head>
 <body>
-
+<%=bath%>
 	<div class="container_fluid">
 		<div class="row">
 			<div class="col-lg-7"></div>
@@ -31,7 +31,7 @@
 				</c:if>
 			</div>
 			<div class="col-lg-5">
-				<form action="/rebot/message.action" class="form-inline">
+				<form action="<%=bath%>/message.action" class="form-inline">
 					<div class="form-group">
 						<label for="command">指令：</label> <input type="text" name="command"
 							id="command" placeholder="请输入指令" value="${command}">
