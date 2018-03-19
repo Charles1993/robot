@@ -48,7 +48,8 @@ public class MessageServlet extends HttpServlet {
 		Statement st=null;
 		try {
 			//指定数据库连接编码，防止出错
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+//			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/duke?useUnicode=true&characterEncoding=utf-8", "duke", "123456");
 			String sql="select * from message";
 //			PreparedStatement ps=con.prepareStatement(sql);
 			st=con.createStatement();

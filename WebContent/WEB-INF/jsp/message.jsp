@@ -13,7 +13,7 @@
 <meta name="keywords" content="">
 
 <link rel="stylesheet" href="<%=bath %>/resources/css/bootstrap.min.css">  
-<script src="<%=bath %>/Wresources/js/bootstrap.min.js"></script>
+<script src="<%=bath %>/resources/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -23,6 +23,11 @@
 	<div class="table-responsive">
 		<table class="table">
 			<caption>机器人信回复维护列表</caption>
+			<div>
+				<c:if test="${currentUser!=null}">
+					<a>${currentUser.userName}</a>
+				</c:if>
+			</div>
 			<thead>
 				<tr>
 					<th>id</th>
