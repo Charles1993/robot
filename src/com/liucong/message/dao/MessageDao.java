@@ -7,6 +7,7 @@
  */
 package com.liucong.message.dao;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,11 +15,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.common.util.DdbjDataBaseUti;
+import com.common.util.MybatisFactorycofig;
 import com.liucong.message.pojo.Message;
 
 public class MessageDao {
-	public List<Message> queryMessagesList(String command,String contend){
+	public List<Message> queryMessagesList_jdbc(String command,String contend){
 		StringBuffer sql= new StringBuffer("select * from message where 1=1");
 		if (command!=null&!command.equals("")) {
 			sql.append(" and command='"+command+"'");
@@ -58,5 +62,19 @@ public class MessageDao {
 
 		return null;
 		
+	}
+	public List<Message> queryMessagesList_mybaits(String command,String contend){
+		SqlSession session=null;
+		List<Message> messages = null;
+		try {
+			session = MybatisFactorycofig.getSqlSession();
+			messages = session.selectList("message.queryMessageList",1);	
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+		return messages;
 	}
 }

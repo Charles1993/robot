@@ -43,7 +43,7 @@ public class MessageServlet extends HttpServlet {
 		String contend=new String((request.getParameter("contend")==null?"":request.getParameter("contend")).getBytes("ISO-8859-1"),"UTF-8");
 		request.setAttribute("command", command);
 		request.setAttribute("contend", contend);
-		List<Message> messages_list=new MessageDao().queryMessagesList(command, contend);
+		List<Message> messages_list=new MessageDao().queryMessagesList_mybaits(command, contend);
 		request.setAttribute("messages", messages_list);
 		request.getRequestDispatcher("/WEB-INF/front/message/message.jsp").forward(request, response);
 	}
