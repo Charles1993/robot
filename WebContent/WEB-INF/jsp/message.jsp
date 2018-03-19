@@ -19,13 +19,17 @@
 <script src="<%=bath%>/resources/js/jquery.min.js"></script>
 <script src="<%=bath%>/resources/js/bootstrap.min.js"></script>
 
-
 </head>
 <body>
 
 	<div class="container_fluid">
 		<div class="row">
 			<div class="col-lg-7"></div>
+      <div>
+				<c:if test="${currentUser!=null}">
+					<a>${currentUser.userName}</a>
+				</c:if>
+			</div>
 			<div class="col-lg-5">
 				<form action="/rebot/message.action" class="form-inline">
 					<div class="form-group">
@@ -75,18 +79,9 @@
 							</c:forEach>
 						</tbody>
 					</table>
-
-				</div>
-
+        </div>
 			</div>
 		</div>
 	</div>
-
-
-
-
-
-
-
 </body>
 </html>
