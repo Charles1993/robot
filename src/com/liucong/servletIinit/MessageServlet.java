@@ -3,6 +3,7 @@ package com.liucong.servletIinit;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -36,6 +37,18 @@ public class MessageServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//get网络请求，只能是通过ISO-8859-1，故要先对此解码,再解码为UTF-8
+		String command=new String((request.getParameter("command")==null?"":request.getParameter("command")).getBytes("ISO-8859-1"),"UTF-8");
+		String contend=new String((request.getParameter("contend")==null?"":request.getParameter("contend")).getBytes("ISO-8859-1"),"UTF-8");
+		StringBuffer sql= new StringBuffer("select * from message where 1=1");
+		if (command!=null&!command.equals("")) {
+			sql.append(" and command='"+command+"'");
+			request.setAttribute("command", command);
+		}
+		if (contend!=null&!contend.equals("")) {
+			sql.append(" and contend like '%"+contend+"%'");
+			request.setAttribute("contend", contend);
+		}
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			System.out.println("驱动加载成功");
@@ -45,15 +58,18 @@ public class MessageServlet extends HttpServlet {
 			System.out.println("驱动加载失败");
 		}
 		Connection con=null;
-		Statement st=null;
+//		Statement st=null;
 		try {
 			//指定数据库连接编码，防止出错
-//			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+
 			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/duke?useUnicode=true&characterEncoding=utf-8", "duke", "123456");
 			String sql="select * from message";
-//			PreparedStatement ps=con.prepareStatement(sql);
-			st=con.createStatement();
-			ResultSet resultSet=st.executeQuery(sql);
+			PreparedStatement ps=con.prepareStatement(sql);
+
+			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+			PreparedStatement ps=con.prepareStatement(sql.toString());
+			ResultSet resultSet=ps.executeQuery();
+
 			List<Message> messages_list=new ArrayList<Message>();
 			while (resultSet.next()) {
 				Message message=new Message();
@@ -62,10 +78,6 @@ public class MessageServlet extends HttpServlet {
 				message.setCommand(resultSet.getString("command"));
 				message.setContend(resultSet.getString("contend"));
 				message.setDescrible(resultSet.getString("describle"));
-				System.out.println((int)resultSet.getInt("id"));
-				System.out.println((String)resultSet.getString("command"));
-				System.out.println((String)resultSet.getString("contend"));
-				System.out.println((String)resultSet.getString("describle"));
 			}
 			request.setAttribute("messages", messages_list);
 			System.out.println("获取数据库连接成功");
@@ -78,7 +90,7 @@ public class MessageServlet extends HttpServlet {
 		}finally {
 			try {
 				con.close();
-				st.close();
+//				st.close();
 				System.out.println("数据库连接关闭");
 			} catch (SQLException e) {
 				e.printStackTrace();
