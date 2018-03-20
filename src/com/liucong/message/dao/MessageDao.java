@@ -14,6 +14,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -63,12 +64,12 @@ public class MessageDao {
 		return null;
 		
 	}
-	public List<Message> queryMessagesList_mybaits(String command,String contend){
+	public List<Message> queryMessagesList_mybaits(Map<String, Object> params){
 		SqlSession session=null;
 		List<Message> messages = null;
 		try {
 			session = MybatisFactorycofig.getSqlSession();
-			messages = session.selectList("message.queryMessageList",1);	
+			messages = session.selectList("message.queryMessageList",params);	
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

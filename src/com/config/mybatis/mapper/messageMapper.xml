@@ -30,12 +30,14 @@
   </resultMap>
 
 
-  <select id="queryMessageList" parameterType="int" resultMap="messageType">
+  <select id="queryMessageList" parameterType="java.util.Map" resultMap="messageType">
     select
       id,
       command,
       contend,
       describle
-    from message
+    from message  where 1=1
+  	<if test="command != null and !&quot;&quot;.equals(command.trim())"> and command like CONCAT('%',#{command},'%' ) </if>
+  	<if test="contend != null and !&quot;&quot;.equals(contend.trim())"> and contend like CONCAT('%',#{contend},'%' )</if>
   </select>
 </mapper>

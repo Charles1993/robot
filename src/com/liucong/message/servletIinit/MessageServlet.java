@@ -8,7 +8,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,7 +18,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.liucong.message.dao.MessageDao;
-import com.liucong.message.pojo.Message;;
+import com.liucong.message.pojo.Message;
+import com.liucong.message.service.MessageService;;
 
 
 
@@ -43,7 +46,10 @@ public class MessageServlet extends HttpServlet {
 		String contend=new String((request.getParameter("contend")==null?"":request.getParameter("contend")).getBytes("ISO-8859-1"),"UTF-8");
 		request.setAttribute("command", command);
 		request.setAttribute("contend", contend);
-		List<Message> messages_list=new MessageDao().queryMessagesList_mybaits(command, contend);
+		Map<String, Object> params=new HashMap<String, Object>();
+		params.put("command", command);
+		params.put("contend", contend);
+		List<Message> messages_list=new MessageService().queryMessagesList(params);
 		request.setAttribute("messages", messages_list);
 		request.getRequestDispatcher("/WEB-INF/front/message/message.jsp").forward(request, response);
 	}
