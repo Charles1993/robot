@@ -16,7 +16,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MybatisFactorycofig {
-	public static SqlSession getSqlSession() throws IOException {
+	public static SqlSession getSqlSession() throws IOException{
 		SqlSession session=null;
 		Reader reader=null;
 		reader = Resources.getResourceAsReader("com/config/mybatis/Config.xml");

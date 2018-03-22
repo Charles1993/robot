@@ -1,13 +1,7 @@
-package com.liucong.message.servletIinit;
+package com.liucong.message.method;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,24 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.liucong.message.dao.MessageDao;
 import com.liucong.message.pojo.Message;
 import com.liucong.message.service.MessageService;;
 
-
-
-/**
- * Servlet implementation class MessageServlet
- */
-
-public class MessageServlet extends HttpServlet {
+public class ListMessage extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    /**
-     * Default constructor. 
-     */
-    public MessageServlet() {
-        // TODO Auto-generated constructor stub
+    public ListMessage() {
     }
 
 	/**

@@ -20,24 +20,22 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="message">
-
-  <resultMap id="messageType" type="com.liucong.message.pojo.Message">
-    <id property="id" jdbcType="INTEGER" column="id" />
-    <result property="command" jdbcType="VARCHAR" column="command" />
-	<result property="contend" jdbcType="VARCHAR" column="contend" />
-	<result property="describle" jdbcType="VARCHAR" column="describle"/>   
-  </resultMap>
-
-
-  <select id="queryMessageList" parameterType="java.util.Map" resultMap="messageType">
-    select
-      id,
-      command,
-      contend,
-      describle
-    from message  where 1=1
-  	<if test="command != null and !&quot;&quot;.equals(command.trim())"> and command like CONCAT('%',#{command},'%' ) </if>
-  	<if test="contend != null and !&quot;&quot;.equals(contend.trim())"> and contend like CONCAT('%',#{contend},'%' )</if>
-  </select>
+<mapper namespace="com.liucong.message.dao.Imessagedao">
+	
+	<resultMap id="messageType" type="com.liucong.message.pojo.Message">
+		<id property="id" jdbcType="INTEGER" column="id" />
+		<result property="command" jdbcType="VARCHAR" column="command" />
+		<result property="contend" jdbcType="VARCHAR" column="contend" />
+		<result property="describle" jdbcType="VARCHAR" column="describle"/>
+	</resultMap>
+	
+	<select id="queryById" parameterType="int" resultMap="messageType">
+		select id, command, contend, describle from message where id=#{_parameter}
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultMap="messageType">
+		select id, command, contend, describle from message where 1=1
+		<if test="command != null and !&quot;&quot;.equals(command.trim())">and command like CONCAT('%',#{command},'%' )</if>
+		<if test="contend != null and !&quot;&quot;.equals(contend.trim())">and contend like CONCAT('%',#{contend–––––º–ºπ@},'%' )</if>
+	</select>
 </mapper>

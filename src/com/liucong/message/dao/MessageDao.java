@@ -22,7 +22,7 @@ import com.common.util.DdbjDataBaseUti;
 import com.common.util.MybatisFactorycofig;
 import com.liucong.message.pojo.Message;
 
-public class MessageDao {
+public class MessageDao{
 	public List<Message> queryMessagesList_jdbc(String command,String contend){
 		StringBuffer sql= new StringBuffer("select * from message where 1=1");
 		if (command!=null&!command.equals("")) {
