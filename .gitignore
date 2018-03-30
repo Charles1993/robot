@@ -8,3 +8,5 @@ WebContent/WEB-INF/classes/*
 robot.iml
 *.war
 WebContent/index.html
+build/
+.gradle/
