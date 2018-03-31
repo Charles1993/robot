@@ -2,3 +2,5 @@ rootProject.name = 'robot'
 include 'SSO'
 include 'IntelligentRobot'
 include 'UI'
+include 'TEST'
+

@@ -1,15 +1,15 @@
-apply plugin: 'java'
-version = "1.0"
-allprojects{
+subprojects{
     group = 'com.wqc.gradle'
     version = "1.0-SNAPSHOTgit"
+    apply plugin: 'groovy'
     apply plugin: 'java'
-    sourceCompatibility = 1.8
+    sourceCompatibility = 1.7
     repositories {
         mavenCentral()
         jcenter()
     }
     dependencies {
+        compile 'org.codehaus.groovy:groovy-all:2.3.11'
         compile  'mysql:mysql-connector-java:5.1.46'
         compile  'log4j:log4j:1.2.17'
         compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.2.3',classifier:'jdk15'

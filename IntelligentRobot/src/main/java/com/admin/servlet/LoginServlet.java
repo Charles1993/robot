@@ -27,7 +27,7 @@ public class LoginServlet extends HttpServlet{
         String userName = req.getParameter("userName");
         String passWord = req.getParameter("passWord");
         if(userName==null || "".equals(userName)){
-            //req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/front/jsp/login.jsp").forward(req,resp);
         }
         User user = null;
         boolean flag = false;
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet{
         Connection connection = null;
         Statement statement = null;
         try {
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/duke?useUnicode=true&characterEncoding=utf-8","duke","123456");
+            connection = DriverManager.getConnection("jdbc:mysql://47.106.103.51:3306/robot?useUnicode=true&characterEncoding=utf-8","root","123");
             String sql = "select * from User where userName = '" + userName + "'";
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
@@ -75,7 +75,7 @@ public class LoginServlet extends HttpServlet{
             //req.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(req,resp);
             req.getRequestDispatcher("/message.action").forward(req,resp);
         }else {
-            req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/WEB-INF/front/jsp/login.jsp").forward(req,resp);
         }
 
     }
