@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 apply plugin: 'java-library'
 version = "1.0"
 apply plugin: 'war'
@@ -45,3 +46,51 @@ task makeWebdir(dependsOn:makejavadir){
         paths.each(createDir);
     }
 }
+=======
+apply plugin: 'java'
+version = "1.0"
+apply plugin: 'war'
+allprojects{
+    group = 'com.wqc.gradle'
+    version = "1.0-SNAPSHOTgit"
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        compile  'mysql:mysql-connector-java:5.1.46'
+        compile  'log4j:log4j:1.2.17'
+        compile group: 'net.sf.json-lib', name: 'json-lib', version: '2.2.3',classifier:'jdk15'
+        compile group: 'net.sf.ezmorph', name: 'ezmorph', version: '1.0.3'
+        compile group: 'commons-lang', name: 'commons-lang', version: '2.3'
+        compile group: 'commons-logging', name: 'commons-logging', version: '1.1.1'
+        compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.7.0'
+        compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+        compile group: 'commons-httpclient', name: 'commons-httpclient', version: '3.1'
+        testImplementation 'junit:junit:4.12'
+    }
+    def createDir = {
+        path ->
+            //如果文件夹不存在，创建
+            File dir = new File(path);
+            if(!dir.exists()){
+                dir.mkdirs();
+            }
+    }
+    task makejavadir{
+        def paths=["src/main/java","src/main/resources","src/test/java","src/test/resources"]
+        doFirst{
+            paths.each(createDir);
+        }
+    }
+    task makeWebdir(dependsOn:makejavadir){
+        def paths=["src/main/webapp"];
+        doFirst{
+            paths.each(createDir);
+        }
+    }
+}
+
+>>>>>>> Stashed changes

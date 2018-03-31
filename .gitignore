@@ -10,3 +10,7 @@ robot.iml
 WebContent/index.html
 build/
 .gradle/
+<<<<<<< Updated upstream
+=======
+*.iml
+>>>>>>> Stashed changes
