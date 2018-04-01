@@ -27,7 +27,7 @@ public class DdbjDataBaseUti {
 		}
 		//指定数据库连接编码，防止出错
 		try {
-			con=DriverManager.getConnection("jdbc:mysql://localhost:3306/rebot?useUnicode=true&characterEncoding=utf-8", "liucong", "123");
+			con=DriverManager.getConnection("jdbc:mysql://47.106.103.51:3306/robot?useUnicode=true&characterEncoding=utf-8", "root", "123");
 			System.out.println("获取数据库连接成功");
 			return con;
 		} catch (SQLException e) {

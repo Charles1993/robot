@@ -2,7 +2,8 @@ package com.admin.service;
 
 import com.admin.pojo.User;
 
-import java.awt.*;
+import java.util.List;
+
 
 public interface UserService {
 

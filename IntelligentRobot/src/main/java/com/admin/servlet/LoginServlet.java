@@ -1,13 +1,16 @@
 package com.admin.servlet;
 
 import com.admin.pojo.User;
+import com.admin.service.UserService;
+import com.admin.service.UserServiceImpl;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.*;
+import java.util.List;
 
 
 public class LoginServlet extends HttpServlet{
@@ -26,54 +29,23 @@ public class LoginServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("userName");
         String passWord = req.getParameter("passWord");
-        if(userName==null || "".equals(userName)){
-            req.getRequestDispatcher("/WEB-INF/front/jsp/login.jsp").forward(req,resp);
-        }
-        User user = null;
         boolean flag = false;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            System.out.println("驱动加载成功");
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            System.out.println("驱动加载失败");
-        }
-        Connection connection = null;
-        Statement statement = null;
-        try {
-            connection = DriverManager.getConnection("jdbc:mysql://47.106.103.51:3306/robot?useUnicode=true&characterEncoding=utf-8","root","123");
-            String sql = "select * from User where userName = '" + userName + "'";
-            statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()){
-                user = new User();
-                user.setId(resultSet.getInt("id"));
-                user.setUserName(resultSet.getString("userName"));
-                user.setPassWord(resultSet.getString("passWord"));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                connection.close();
-                statement.close();
-                System.out.println("数据库关闭");
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-
+        Logger logger = Logger.getLogger(LoginServlet.class);
+        logger.warn("userName: " +userName +" passWord :" +passWord);
+        logger.debug(String.format("userName : %s password : %s",userName,passWord));
+        UserService userService = new UserServiceImpl();
+        User user = userService.findUserByUserName(userName);
         if (user != null) {
             if (userName.equals(user.getUserName()) && passWord.equals(user.getPassWord())){
                 flag = true;
             }
         }
         if (flag){
+            List<User> users = userService.findUsers();
             req.getSession().setAttribute("currentUser",user);
             req.setAttribute("currentUser",user);
-            //req.getRequestDispatcher("WEB-INF/jsp/login.jsp").forward(req,resp);
-            req.getRequestDispatcher("/message.action").forward(req,resp);
+            req.setAttribute("users",users);
+            req.getRequestDispatcher("/WEB-INF/front/jsp/users.jsp").forward(req,resp);
         }else {
             req.getRequestDispatcher("/WEB-INF/front/jsp/login.jsp").forward(req,resp);
         }

@@ -1,8 +1,10 @@
 package com.admin.service;
 
+import com.admin.dao.UserDao;
 import com.admin.pojo.User;
 
-import java.awt.*;
+import java.util.List;
+
 
 /**
  * @Author: Duke
@@ -10,15 +12,30 @@ import java.awt.*;
  * @Date: Created in 下午9:30 2018/3/19
  * @Modified By:
  */
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+    private UserDao userDao;
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    public UserServiceImpl() {
+        UserDao userDao = new UserDao();
+        this.setUserDao(userDao);
+    }
+
     @Override
     public User findUser(int id) {
         return null;
     }
 
+    /**
+     * @param userName
+     * @return
+     */
     @Override
     public User findUserByUserName(String userName) {
-        return null;
+        return userDao.findUserByUserName(userName);
     }
 
     @Override
@@ -26,8 +43,11 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    /**
+     * @return
+     */
     @Override
-    public List findUsers() {
-        return null;
+    public List<User> findUsers() {
+        return userDao.findUsers();
     }
 }
