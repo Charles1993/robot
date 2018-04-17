@@ -2,4 +2,5 @@
 dependencies {
     compile  'org.mybatis:mybatis:3.4.6'
     compile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.0'
+    compile group: 'io.netty', name: 'netty-all', version: '5.0.0.Alpha2'
 }
